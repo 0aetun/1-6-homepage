@@ -53,6 +53,58 @@
   </a>
 
 </div>
+<script>
+    // 로그인 안 했으면 클릭 막기
+    if(localStorage.getItem("isLoggedIn") !== "true") {
 
+        // 페이지 안 버튼/링크 비활성화
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const buttons = document.querySelectorAll("button, a");
+
+            buttons.forEach(btn => {
+
+                // 로그인 버튼은 제외
+                if(btn.getAttribute("href") !== "./login.html") {
+
+                    btn.style.pointerEvents = "none";
+                    btn.style.opacity = "0.5";
+                    btn.style.cursor = "not-allowed";
+                }
+            });
+
+            alert("로그인 후 이용 가능합니다.");
+        });
+    }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    // 로그인 안 되어있으면
+    if(localStorage.getItem("isLoggedIn") !== "true") {
+
+        const links = document.querySelectorAll("a");
+
+        links.forEach(link => {
+
+            if(link.getAttribute("href") !== "./login.html") {
+
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    alert("로그인 후 이용 가능합니다.");
+                });
+            }
+        });
+    }
+});
+
+// 로그아웃
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    alert("로그아웃 되었습니다.");
+    window.location.href = "./login.html";
+}
+</script>
 </body>
+<button onclick="logout()">로그아웃</button>
 </html>
