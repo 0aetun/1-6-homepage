@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>시간표</title>
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <h1>📚 1학년 6반 시간표</h1>
+
+  <!-- 요일 버튼 -->
+
+  <div class="days">
+
+    <button onclick="showDay('mon')">월</button>
+    <button onclick="showDay('tue')">화</button>
+    <button onclick="showDay('wed')">수</button>
+    <button onclick="showDay('thu')">목</button>
+    <button onclick="showDay('fri')">금</button>
+
+  </div>
+
+  <!-- 시간표 -->
+
+  <div class="timetable" id="timetable">
+
+  </div>
+
+  <br>
+
+  <a href="../index.html">← 메인으로</a>
+
+</div>
+
+<script>
+
+const schedules = {
+
+  mon: [
+    "1교시 - 체육 ",
+    "2교시 - 공통수학 1 ",
+    "3교시 - 통합사회 - 일반",
+    "4교시 - 통합영어 ",
+    "5교시 - 영발토 - 김태영T",
+    "6교시 - 한국사 ",
+    "7교시 - 공통수학 2 "
+  ],
+
+  tue: [
+    "1교시 - 과탐실 ",
+    "2교시 - 통합과학 ",
+    "3교시 - 한국사 ",
+    "4교시 - 통합사회 ",
+    "5교시 - 공통국어 ",
+    "6교시 - 영발토 - 애슐리, 손영호T",
+    "7교시 - 통합과학 - 생명"
+  ],
+
+  wed: [
+   "1교시 - 공통수학 1 ",
+    "2교시 - 통합과학 - 화학",
+    "3교시 - 통합사회 - 진선민T",
+    "4교시 - 통합영어 - 김고운T",
+    "5교시 - 영발토 - 김태영T",
+    "6교시 - 한국사 - 이미희T",
+    "7교시 - 공통수학 2 - 김태윤T"
+  ],
+
+  thu: [
+   "1교시 - 체육 - 박한진T",
+    "2교시 - 공통수학 1 - 김태윤T",
+    "3교시 - 통합사회 - 진선민T",
+    "4교시 - 통합영어 - 김고운T",
+    "5교시 - 영발토 - 김태영T",
+    "6교시 - 한국사 - 이미희T",
+    "7교시 - 공통수학 2 - 김태윤T"
+  ],
+
+  fri: [
+    "1교시 - 체육 - 박한진T",
+    "2교시 - 공통수학 1 - 김태윤T",
+    "3교시 - 통합사회 - 진선민T",
+    "4교시 - 통합영어 - 김고운T",
+    "5교시 - 영발토 - 김태영T",
+    "6교시 - 한국사 - 이미희T",
+    "7교시 - 공통수학 2 - 김태윤T"
+  ]
+
+};
+
+function showDay(day) {
+
+  const timetable = document.getElementById("timetable");
+
+  timetable.innerHTML = "";
+
+  schedules[day].forEach(subject => {
+
+    timetable.innerHTML += `
+      <div class="subject-card">
+        ${subject}
+      </div>
+    `;
+
+  });
+
+}
+
+/* 처음엔 월요일 표시 */
+
+showDay("mon");
+
+</script>
+
+</body>
+</html>
