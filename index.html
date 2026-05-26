@@ -10,24 +10,21 @@
 </head>
 
 <body>
-  
-<button onclick="location.href='./login.html'">
-    로그인
-</button>
+
+<!-- 로그인 상태에 따라 버튼 전환 -->
+<button id="auth-btn" onclick="authAction()">로그인</button>
 
 <div class="background"></div>
 
 <div class="container">
 
   <!-- 중앙 원 -->
-
   <div class="center-circle">
     <h1>1-6</h1>
     <p>CLASS PORTAL</p>
   </div>
 
   <!-- 메뉴 -->
-
   <a href="pages/notice.html" class="menu top">
     📢 공지사항
   </a>
@@ -54,36 +51,50 @@
 
 </div>
 
-<button onclick="logout()">로그아웃</button>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    if (localStorage.getItem("isLoggedIn") !== "true") {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const authBtn = document.getElementById("auth-btn");
+    const menus = document.querySelectorAll("a.menu");
 
-        const elements = document.querySelectorAll("button, a");
+    if (isLoggedIn) {
 
-        elements.forEach(el => {
+        // 로그인 상태 - 버튼 "로그아웃"으로, 메뉴 활성화
+        authBtn.innerText = "로그아웃";
 
-            const isLoginBtn =
-                el.getAttribute("onclick") === "location.href='./login.html'" ||
-                el.getAttribute("href") === "./login.html";
-
-            if (!isLoginBtn) {
-                el.style.pointerEvents = "none";
-                el.style.opacity = "0.5";
-                el.style.cursor = "not-allowed";
-            }
+        menus.forEach(el => {
+            el.style.pointerEvents = "auto";
+            el.style.opacity = "1";
+            el.style.cursor = "pointer";
         });
 
-        alert("로그인 후 이용 가능합니다.");
+    } else {
+
+        // 비로그인 상태 - 버튼 "로그인"으로, 메뉴 잠금
+        authBtn.innerText = "로그인";
+
+        menus.forEach(el => {
+            el.style.pointerEvents = "none";
+            el.style.opacity = "0.5";
+            el.style.cursor = "not-allowed";
+        });
     }
 });
 
-function logout() {
-    localStorage.removeItem("isLoggedIn");
-    alert("로그아웃 되었습니다.");
-    window.location.href = "./login.html";
+function authAction() {
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    if (isLoggedIn) {
+        // 로그아웃
+        localStorage.removeItem("isLoggedIn");
+        alert("로그아웃 되었습니다.");
+        location.reload();
+    } else {
+        // 로그인 페이지 이동
+        location.href = "./login.html";
+    }
 }
 </script>
 
